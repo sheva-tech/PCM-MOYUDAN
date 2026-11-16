@@ -1,0 +1,17 @@
+{% extends "pcm/base.html" %}
+{% block title %}Pimpinan — {{ profil.nama_singkat }}{% endblock %}
+{% block content %}
+<h1>Pimpinan</h1>
+{% regroup daftar_pimpinan by bagian as kelompok %}
+{% for k in kelompok %}
+  <h2>{{ k.grouper }}</h2>
+  <div class="grid grid-sm">
+    {% for p in k.list %}
+    <div class="person">
+      {% if p.foto %}<img src="{{ p.foto.url }}" alt="Foto {{ p.nama }}" loading="lazy">{% else %}<div class="avatar" aria-hidden="true">{{ p.nama|slice:":1" }}</div>{% endif %}
+      <strong>{{ p.nama }}</strong><span>{{ p.jabatan }}</span><small class="muted">Periode {{ p.periode }}</small>
+    </div>
+    {% endfor %}
+  </div>
+{% empty %}<p class="muted">Data pimpinan belum tersedia.</p>{% endfor %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "pcm/base.html" %}
+{% load static %}
+{% block content %}
+<section class="hero">
+  {% if profil.gambar_utama %}<img src="{{ profil.gambar_utama.url }}" alt="Pimpinan {{ profil.nama_singkat }}">{% endif %}
+  <div class="hero-text">
+    <h1>{{ profil.nama|default:"Pimpinan Cabang Muhammadiyah" }}</h1>
+    <p>{{ profil.tagline }}</p>
+  </div>
+</section>
+
+<section class="stats">
+  <div><b>{{ jumlah_ranting }}</b><span>Ranting</span></div>
+  <div><b>{{ jumlah_amal_usaha }}</b><span>Amal usaha</span></div>
+  <div><b>{{ profil.jumlah_anggota_ktam|default_if_none:"–" }}</b><span>Anggota ber-KTAM</span></div>
+</section>
+
+<section>
+  <h2>Berita terbaru</h2>
+  <div class="grid">{% for berita in berita_terbaru %}{% include "pcm/includes/kartu_berita.html" %}{% empty %}<p class="muted">Belum ada berita terbit.</p>{% endfor %}</div>
+  <p><a href="{% url 'pcm:berita_list' %}">Semua berita</a></p>
+</section>
+
+<section>
+  <h2>Agenda mendatang</h2>
+  <ul class="agenda">{% for a in agenda_mendatang %}{% include "pcm/includes/item_agenda.html" %}{% empty %}<li class="muted">Belum ada agenda mendatang.</li>{% endfor %}</ul>
+  <p><a href="{% url 'pcm:agenda' %}">Semua agenda</a></p>
+</section>
+{% endblock %}
