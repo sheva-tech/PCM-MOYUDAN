@@ -1,0 +1,9 @@
+{% extends "pcm/base.html" %}
+{% block title %}Agenda — {{ profil.nama_singkat }}{% endblock %}
+{% block content %}
+<h1>Agenda</h1>
+<h2>Akan datang</h2>
+<ul class="agenda">{% for a in akan_datang %}{% include "pcm/includes/item_agenda.html" %}{% empty %}<li class="muted">Belum ada agenda mendatang.</li>{% endfor %}</ul>
+<h2>Sudah terlaksana</h2>
+<ul class="agenda">{% for a in terlaksana %}{% include "pcm/includes/item_agenda.html" %}{% empty %}<li class="muted">Belum ada agenda terlaksana.</li>{% endfor %}</ul>
+{% endblock %}

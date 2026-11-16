@@ -1,0 +1,11 @@
+{% extends "pcm/base.html" %}
+{% block title %}Unduhan — {{ profil.nama_singkat }}{% endblock %}
+{% block content %}
+<h1>Unduhan</h1>
+<ul class="agenda">
+{% for d in daftar_dokumen %}
+  <li class="agenda-item"><time datetime="{{ d.tanggal_unggah|date:'Y-m-d' }}">{{ d.tanggal_unggah|date:"j M Y" }}</time>
+    <div><strong>{{ d.judul }}</strong><p>{{ d.keterangan }}</p><a class="btn" href="{{ d.berkas.url }}" download>Unduh</a></div></li>
+{% empty %}<li class="muted">Belum ada dokumen.</li>{% endfor %}
+</ul>
+{% endblock %}

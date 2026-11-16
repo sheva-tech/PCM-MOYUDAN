@@ -1,0 +1,16 @@
+{% extends "pcm/base.html" %}
+{% block title %}Amal Usaha — {{ profil.nama_singkat }}{% endblock %}
+{% block content %}
+<h1>Amal usaha</h1>
+{% for bidang, daftar in kelompok %}
+  <h2>{{ bidang }}</h2>
+  <div class="grid">
+    {% for a in daftar %}
+    <article class="card">
+      {% if a.gambar %}<img src="{{ a.gambar.url }}" alt="" loading="lazy">{% endif %}
+      <div class="card-body"><h3>{{ a.nama }}</h3><p>{{ a.deskripsi|default:"Deskripsi belum tersedia." }}</p>{% if a.alamat %}<p class="muted">{{ a.alamat }}</p>{% endif %}</div>
+    </article>
+    {% endfor %}
+  </div>
+{% empty %}<p class="muted">Data amal usaha belum tersedia.</p>{% endfor %}
+{% endblock %}

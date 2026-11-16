@@ -1,0 +1,11 @@
+{% extends "pcm/base.html" %}
+{% block title %}Ranting — {{ profil.nama_singkat }}{% endblock %}
+{% block content %}
+<h1>Ranting</h1>
+{% if daftar_ranting %}
+<div class="scroll"><table>
+  <thead><tr><th>Ranting</th><th>Ketua</th><th>Alamat</th><th>Telepon</th></tr></thead>
+  <tbody>{% for r in daftar_ranting %}<tr><td>{{ r.nama }}</td><td>{{ r.ketua|default:"belum tersedia" }}</td><td>{{ r.alamat|default:"belum tersedia" }}</td><td>{{ r.telepon|default:"–" }}</td></tr>{% endfor %}</tbody>
+</table></div>
+{% else %}<p class="muted">Data ranting belum tersedia.</p>{% endif %}
+{% endblock %}
