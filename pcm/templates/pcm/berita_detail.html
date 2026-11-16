@@ -1,0 +1,14 @@
+{% extends "pcm/base.html" %}
+{% block title %}{{ berita.judul }} — {{ profil.nama_singkat }}{% endblock %}
+{% block content %}
+<article class="artikel">
+  <h1>{{ berita.judul }}</h1>
+  <time datetime="{{ berita.tanggal_terbit|date:'Y-m-d' }}">{{ berita.tanggal_terbit|date:"j F Y" }}</time>
+  {% if berita.gambar_sampul %}<img src="{{ berita.gambar_sampul.url }}" alt="">{% endif %}
+  <div>{{ berita.isi|linebreaks }}</div>
+</article>
+{% if berita_lainnya %}
+<h2>Berita lainnya</h2>
+<div class="grid">{% for berita in berita_lainnya %}{% include "pcm/includes/kartu_berita.html" %}{% endfor %}</div>
+{% endif %}
+{% endblock %}

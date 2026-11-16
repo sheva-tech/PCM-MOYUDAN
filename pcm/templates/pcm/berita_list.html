@@ -1,0 +1,17 @@
+{% extends "pcm/base.html" %}
+{% block title %}Berita — {{ profil.nama_singkat }}{% endblock %}
+{% block content %}
+<h1>Berita</h1>
+<form method="get" class="cari" role="search">
+  <input type="search" name="q" value="{{ q }}" placeholder="Cari berita" aria-label="Cari berita">
+  <button class="btn" type="submit">Cari</button>
+</form>
+<div class="grid">{% for berita in halaman %}{% include "pcm/includes/kartu_berita.html" %}{% empty %}<p class="muted">{% if q %}Tidak ada berita yang cocok dengan “{{ q }}”.{% else %}Belum ada berita terbit.{% endif %}</p>{% endfor %}</div>
+{% if halaman.has_other_pages %}
+<nav class="pager" aria-label="Halaman berita">
+  {% if halaman.has_previous %}<a href="?page={{ halaman.previous_page_number }}{% if q %}&q={{ q|urlencode }}{% endif %}">Sebelumnya</a>{% endif %}
+  <span>Halaman {{ halaman.number }} dari {{ halaman.paginator.num_pages }}</span>
+  {% if halaman.has_next %}<a href="?page={{ halaman.next_page_number }}{% if q %}&q={{ q|urlencode }}{% endif %}">Berikutnya</a>{% endif %}
+</nav>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "pcm/base.html" %}
+{% block title %}Kontak — {{ profil.nama_singkat }}{% endblock %}
+{% block content %}
+<h1>Kontak</h1>
+<p><strong>Sekretariat</strong><br>{{ profil.alamat_sekretariat|default:"Alamat belum tersedia."|linebreaksbr }}</p>
+<form method="post" class="form" novalidate>
+  {% csrf_token %}
+  {% for field in form %}
+    <div class="field">
+      {{ field.label_tag }}{{ field }}
+      {% for e in field.errors %}<p class="error">{{ e }}</p>{% endfor %}
+    </div>
+  {% endfor %}
+  <button class="btn" type="submit">Kirim pesan</button>
+</form>
+{% endblock %}
