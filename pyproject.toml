@@ -1,0 +1,15 @@
+[project]
+name = "pcm-moyudan"
+version = "0.1.0"
+description = "Website PCM Moyudan (tugas TIF1336)"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=6.0,<7",
+    "pillow",
+    "gunicorn",
+    "whitenoise",
+    "dj-database-url",
+    "python-dotenv",
+    "psycopg[binary]",
+    "django-storages[s3]",
+]
