@@ -1,0 +1,56 @@
+{% load static %}<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ profil.nama_singkat|default:"PCM" }}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="{% url 'pcm:beranda' %}">
+      <img src="{% static 'img/logo-muhammadiyah.svg' %}" alt="Logo Muhammadiyah" width="44" height="44">
+      <span><strong>{{ profil.nama_singkat|default:"PCM" }}</strong><small>{{ profil.tagline }}</small></span>
+    </a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <label for="nav-toggle" class="burger" aria-label="Buka menu">&#9776;</label>
+    <nav class="menu" aria-label="Navigasi utama">
+      <a href="{% url 'pcm:beranda' %}">Beranda</a>
+      <a href="{% url 'pcm:profil' %}">Profil</a>
+      <a href="{% url 'pcm:pimpinan' %}">Pimpinan</a>
+      <a href="{% url 'pcm:ranting' %}">Ranting</a>
+      <a href="{% url 'pcm:amal_usaha' %}">Amal Usaha</a>
+      <a href="{% url 'pcm:berita_list' %}">Berita</a>
+      <a href="{% url 'pcm:agenda' %}">Agenda</a>
+      <a href="{% url 'pcm:unduhan' %}">Unduhan</a>
+      <a href="{% url 'pcm:kontak' %}">Kontak</a>
+    </nav>
+  </div>
+</header>
+
+{% if messages %}
+<div class="wrap">{% for m in messages %}<p class="alert {{ m.tags }}" role="status">{{ m }}</p>{% endfor %}</div>
+{% endif %}
+
+<main class="wrap">{% block content %}{% endblock %}</main>
+
+<footer class="foot">
+  <div class="wrap cols">
+    <div>
+      <h3>{{ profil.nama }}</h3>
+      <p>{{ profil.alamat_sekretariat|default:"Alamat sekretariat belum tersedia." }}</p>
+      <p>Telp: {{ profil.telepon|default:"belum tersedia" }}<br>Email: {{ profil.email|default:"belum tersedia" }}</p>
+    </div>
+    <div>
+      <h3>Tautan Persyarikatan</h3>
+      <ul>{% for t in tautan_terkait %}<li><a href="{{ t.url }}" target="_blank" rel="noopener">{{ t.nama }}</a></li>{% empty %}<li>Belum ada tautan.</li>{% endfor %}</ul>
+    </div>
+  </div>
+  <div class="wrap legal">
+    <p>Website ini dibuat untuk tugas kuliah Pemrograman Web berbasis Framework, bukan website resmi {{ profil.nama|default:"PCM" }}. Situs resmi: <a href="https://muhammadiyahmoyudan.or.id" target="_blank" rel="noopener">muhammadiyahmoyudan.or.id</a>.</p>
+    <p>Logo Muhammadiyah: K. H. Siradj Dahlan, vektor oleh Hibensis, via Wikimedia Commons, lisensi CC BY-SA 4.0. Foto: dokumentasi PCM Moyudan (muhammadiyahmoyudan.or.id).</p>
+  </div>
+</footer>
+</body>
+</html>
