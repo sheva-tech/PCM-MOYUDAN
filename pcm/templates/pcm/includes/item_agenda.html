@@ -1,0 +1,4 @@
+<li class="agenda-item">
+  <time datetime="{{ a.waktu_mulai|date:'c' }}">{{ a.waktu_mulai|date:"j M Y, H:i" }}</time>
+  <div><strong>{{ a.nama_kegiatan }}</strong>{% if a.tempat %}<br><span class="muted">{{ a.tempat }}</span>{% endif %}{% if a.keterangan %}<p>{{ a.keterangan }}</p>{% endif %}</div>
+</li>
